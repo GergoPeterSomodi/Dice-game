@@ -1,0 +1,42 @@
+import random
+
+value = input('Give your name!')
+if value.startswith('s') or value.startswith('S'):
+    print('Szia', value, '!')
+else:
+    print('Hello', value, '!')
+
+Money = 300
+isQuit = ""
+while isQuit != 'y':
+
+    Bet = 0
+    print('Your cash:', Money, '$')
+    while Bet == 0:
+        Betstr = input("Place Your Bet! OR Press q for Quit!")
+        if Betstr.isnumeric():
+            Bet = int(Betstr)
+            if Bet > Money:
+                Bet = 0
+                print("Not enough money!")
+            else:
+                FirstDice = random.randint(1, 6)
+                SecondDice = random.randint(1, 6)
+
+                print(FirstDice)
+                print(SecondDice)
+
+                playerWinList = [(4, 4), (5, 5), (6, 6), (5, 6), (6, 5)]
+                computerWinList = [(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)]
+                if playerWinList.__contains__((FirstDice, SecondDice)):
+                    print("Contains")
+                    Money = Money + Bet
+                elif computerWinList.__contains__((FirstDice, SecondDice)):
+                    print("You Suck")
+                    Money = Money - Bet
+                else:
+                    print("draw")
+        elif Betstr.__contains__('q'):
+            isQuit = input('Do you want to quit?')
+            print(isQuit)
+            break
